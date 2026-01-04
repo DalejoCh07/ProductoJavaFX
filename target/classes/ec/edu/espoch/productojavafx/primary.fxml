@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="ec.edu.espoch.productojavafx.PrimaryController" stylesheets="@style.css" styleClass="main-container">
+    <children>
+        <Label text="Gestión de Productos" styleClass="header-label"/>
+        
+        <HBox spacing="20">
+            <GridPane hgap="10" vgap="10">
+                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtNombre" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                
+                <Label text="Categoría:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="cbCategoria" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="150"/>
+                
+                <Label text="Precio:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtPrecio" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                
+                <Label text="Fecha Ingreso:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dpFecha" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                
+                <Label text="Stock:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Spinner fx:id="spStock" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="150"/>
+            </GridPane>
+            
+            <TableView fx:id="tblProductos" prefWidth="400">
+                <columns>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="100"/>
+                    <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="100"/>
+                    <TableColumn fx:id="colPrecio" text="Precio" prefWidth="80"/>
+                    <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
+                </columns>
+            </TableView>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Nuevo" onAction="#limpiarFormulario" styleClass="btn-nuevo"/>
+            <Button text="Guardar" onAction="#guardarProducto" styleClass="btn-guardar"/>
+            <Button text="Eliminar" onAction="#eliminarProducto" styleClass="btn-eliminar"/>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

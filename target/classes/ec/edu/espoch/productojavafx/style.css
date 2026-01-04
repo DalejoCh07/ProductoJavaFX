@@ -1,0 +1,28 @@
+.main-container {
+    -fx-background-color: #f4f4f4;
+}
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.btn-guardar {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+}
+
+.btn-eliminar {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+}
+
+.btn-nuevo {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-border-color: #bdc3c7;
+}
