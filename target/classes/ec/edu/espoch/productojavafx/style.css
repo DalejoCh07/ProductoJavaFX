@@ -26,3 +26,18 @@
 .table-view {
     -fx-border-color: #bdc3c7;
 }
+
+.btn-editar {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+}
+
+.btn-limpiar {
+    -fx-background-color: #95a5a6;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-opacity: 0.8;
+    -fx-cursor: hand;
+}

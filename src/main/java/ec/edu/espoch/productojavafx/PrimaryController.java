@@ -22,14 +22,13 @@ public class PrimaryController {
     @FXML private TableColumn<Producto, Integer> colStock;
 
     private ObservableList<Producto> listaProductos;
+    private Producto productoEnEdicion = null; // Para saber si estamos editando uno existente
 
     @FXML
     public void initialize() {
-        // Configurar ComboBox y Spinner
         cbCategoria.setItems(FXCollections.observableArrayList("Electrónica", "Hogar", "Alimentos", "Ropa"));
         spStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
         
-        // Configurar Tabla
         listaProductos = FXCollections.observableArrayList();
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
@@ -49,15 +48,40 @@ public class PrimaryController {
             int stock = spStock.getValue();
 
             if (nombre.isEmpty() || cat == null || fecha == null) {
-                mostrarAlerta("Error", "Por favor llene todos los campos.");
+                mostrarAlerta("Error", "Llene todos los campos.");
                 return;
             }
 
-            Producto p = new Producto(nombre, cat, precio, fecha, stock);
-            listaProductos.add(p);
+            if (productoEnEdicion == null) {
+                // Agregar nuevo
+                listaProductos.add(new Producto(nombre, cat, precio, fecha, stock));
+            } else {
+                // Actualizar existente
+                productoEnEdicion.setNombre(nombre);
+                productoEnEdicion.setCategoria(cat);
+                productoEnEdicion.setPrecio(precio);
+                productoEnEdicion.setFechaIngreso(fecha);
+                productoEnEdicion.setStock(stock);
+                tblProductos.refresh();
+                productoEnEdicion = null;
+            }
             limpiarFormulario();
         } catch (NumberFormatException e) {
-            mostrarAlerta("Error de formato", "El precio debe ser un número válido.");
+            mostrarAlerta("Error", "Precio inválido.");
+        }
+    }
+
+    @FXML
+    private void cargarDatosParaEditar() {
+        productoEnEdicion = tblProductos.getSelectionModel().getSelectedItem();
+        if (productoEnEdicion != null) {
+            txtNombre.setText(productoEnEdicion.getNombre());
+            cbCategoria.setValue(productoEnEdicion.getCategoria());
+            txtPrecio.setText(String.valueOf(productoEnEdicion.getPrecio()));
+            dpFecha.setValue(productoEnEdicion.getFechaIngreso());
+            spStock.getValueFactory().setValue(productoEnEdicion.getStock());
+        } else {
+            mostrarAlerta("Selección", "Seleccione un producto de la tabla.");
         }
     }
 
@@ -67,7 +91,7 @@ public class PrimaryController {
         if (seleccionado != null) {
             listaProductos.remove(seleccionado);
         } else {
-            mostrarAlerta("Atención", "Seleccione un producto de la tabla para eliminar.");
+            mostrarAlerta("Atención", "Seleccione un producto.");
         }
     }
 
@@ -78,12 +102,14 @@ public class PrimaryController {
         txtPrecio.clear();
         dpFecha.setValue(null);
         spStock.getValueFactory().setValue(0);
+        productoEnEdicion = null;
         tblProductos.getSelectionModel().clearSelection();
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
+        alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }

@@ -27,12 +27,12 @@
                 <Spinner fx:id="spStock" GridPane.rowIndex="4" GridPane.columnIndex="1" prefWidth="150"/>
             </GridPane>
             
-            <TableView fx:id="tblProductos" prefWidth="400">
+            <TableView fx:id="tblProductos" prefWidth="450">
                 <columns>
-                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="100"/>
+                    <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
                     <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="100"/>
                     <TableColumn fx:id="colPrecio" text="Precio" prefWidth="80"/>
-                    <TableColumn fx:id="colStock" text="Stock" prefWidth="80"/>
+                    <TableColumn fx:id="colStock" text="Stock" prefWidth="70"/>
                 </columns>
             </TableView>
         </HBox>
@@ -40,7 +40,9 @@
         <HBox spacing="10" alignment="CENTER">
             <Button text="Nuevo" onAction="#limpiarFormulario" styleClass="btn-nuevo"/>
             <Button text="Guardar" onAction="#guardarProducto" styleClass="btn-guardar"/>
+            <Button text="Editar" onAction="#cargarDatosParaEditar" styleClass="btn-editar"/>
             <Button text="Eliminar" onAction="#eliminarProducto" styleClass="btn-eliminar"/>
+            <Button text="Limpiar" onAction="#limpiarFormulario" styleClass="btn-limpiar"/>
         </HBox>
     </children>
     <padding>
